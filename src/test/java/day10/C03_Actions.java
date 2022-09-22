@@ -23,6 +23,7 @@ public class C03_Actions extends TestBaseBeforeAfter {
         html kodları arasında web elementi bulur ama ulaşamadığı için
         ElementNotInteractableException: element not interactable exception'ı fırlatır
          */
+        // - Account menusundan create a list linkine tıklayalım
         driver.findElement(By.xpath("//*[text()='Create a List']")).click();
     }
 }

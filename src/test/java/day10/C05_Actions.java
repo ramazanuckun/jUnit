@@ -31,7 +31,7 @@ https://demoqa.com/droppable adresine gidelim
 
 //“Drop here” yazisi yerine “Dropped!” oldugunu test edin
 
-        Assert.assertEquals("Dropped!",driver.findElement(By.xpath("//*[text()='Dropped!']")));
-
+       // Assert.assertEquals("Dropped!",driver.findElement(By.xpath("//*[text()='Dropped!']")));
+        Assert.assertEquals("Dropped!",driver.findElement(By.xpath("//*[text()='Dropped!']")).getText());
     }
 }
