@@ -19,7 +19,8 @@ protected Actions actions;
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-  actions=new Actions(driver);
+
+        actions=new Actions(driver);
     }
     @After
     public void tearDown() {
