@@ -1,4 +1,4 @@
-package day12;
+package day12_dosyaYukleme;
 
 import org.junit.Test;
 import org.openqa.selenium.By;

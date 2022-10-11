@@ -3,7 +3,9 @@ package Zautonationexercise.com;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import utilities.TestBaseBeforeAfter;
 
@@ -12,93 +14,143 @@ import java.util.List;
 public class Test1_Case1 extends TestBaseBeforeAfter {
 
     @Test
-    public void test1(){
+    public void test1() throws InterruptedException {
 
-        // 2. Navigate to url 'http://automationexercise.com'
+            /*
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Signup / Login' button
+    5. Verify 'New User Signup!' is visible
+    6. Enter name and email address
+    7. Click 'Signup' button
+    8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
+    9. Fill details: Title, Name, Email, Password, Date of birth
+    10. Select checkbox 'Sign up for our newsletter!'
+    11. Select checkbox 'Receive special offers from our partners!'
+    12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
+    13. Click 'Create Account button'
+    14. Verify that 'ACCOUNT CREATED!' is visible
+    15. Click 'Continue' button
+    16. Verify that 'Logged in as username' is visible
+    17. Click 'Delete Account' button
+    18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
+     */
+        //2
+        driver.get("http://automationexercise.com");
 
-      driver.get("http://automationexercise.com");
-
-
-
-
-        // 3. Verify that home page is visible successfully
-driver.getTitle();
-
-        //4. Click on 'Signup / Login' button
-driver.findElement(By.xpath("//i[@class='fa fa-lock']")).click();
-
-        // 5. Verify 'New User Signup!' is visible
-        Assert.assertTrue(driver.findElement(By.xpath("(//h2)[3]")).isDisplayed());
-
-        //6. Enter name and email address
-
-        driver.findElement(By.xpath("//input[@type='text']")).sendKeys("rru3206");
-    driver.findElement(By.xpath("(//input[@type='email'])[2]")).sendKeys("rru.3271@gmail.com");
-        //7. Click 'Signup' button
-        driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
-
-        //8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
-     Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Enter Account Information']")).isDisplayed());
-        //9. Fill details: Title, Name, Email, Password, Date of birth
-driver.findElement(By.id("uniform-id_gender1")).click();
-driver.findElement(By.xpath("//input[@id='password']"))
-        .sendKeys("418639");
-driver.findElement(By.xpath("//select[@id='days']")).sendKeys("18");
-WebElement ayim=driver.findElement(By.xpath("//select[@id='months']"));
-        Select select=new Select(ayim);
-        select.selectByIndex(8);
-
-driver.findElement(By.xpath("//select[@id='years']")).sendKeys("1981");
-      /*
-//10. Select checkbox 'Sign up for our newsletter!'
-
-  driver.findElement(By.xpath("(//input[@type='checkbox'])[1]")).click();
-
-        //11. Select checkbox 'Receive special offers from our partners!'
-        driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
+        //3
+        WebElement homepage = driver.findElement(By.xpath("//html"));
+      /*  if (homepage.isDisplayed()) {
+            System.out.println("Home Page testi PASSED");
+        } else {
+            System.out.println("Home Page testi FAILED");
+        }
 
 
        */
-        //12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
+        Assert.assertTrue(driver.getTitle().contains("//html"));
+        //4
+        driver.findElement(By.xpath("//*[@class='fa fa-lock']")).click();
 
-        driver.findElement(By.xpath("//input[@type='text'][3]")).sendKeys("rahmi");
-        driver.findElement(By.xpath("//input[@type='text'][4]")).sendKeys("rahmi");
-        driver.findElement(By.xpath("//input[@type='text'][5]")).sendKeys("rahmi");
-        driver.findElement(By.xpath("//input[@type='text'][6]")).sendKeys("rahmi");
-        driver.findElement(By.xpath("//input[@type='text'][7]")).sendKeys("rahmi");
-WebElement company=driver.findElement(By.xpath("//select[@id='country']"));
-Select select1=new Select(company);
-select1.selectByIndex(3);
-        //13. Click 'Create Account button'
-        //1/4. Verify that 'ACCOUNT CREATED!' is visible
-        //15. Click 'Continue' button
-        //16. Verify that 'Logged in as username' is visible
-        //17. Click 'Delete Account' button
-        //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
+        //5
+        WebElement signUpText = driver.findElement(By.xpath("//h2"));
+        if (signUpText.getText().contains("New User Signup!")) {
+            System.out.println("Sign Up testi PASSED");
+        } else {
+            System.out.println("Sign Up testi FAILED");
+        }
 
+        //6
+        driver.findElement(By.xpath("//input[@data-qa='signup-name']")).sendKeys("Ali Ata");
 
+        driver.findElement(By.xpath("//input[@data-qa='signup-email']")).sendKeys("haliatabak1@gmail.com");
 
+        //7
+        driver.findElement(By.xpath("//button[@data-qa='signup-button']")).click();
 
+        //8
+        WebElement headerAccount = driver.findElement(By.xpath("(//h2[@class='title text-center'])[1]"));
+        if (headerAccount.isDisplayed()) {
+            System.out.println("Enter Account testi PASSED");
+        } else {
+            System.out.println("Enter Account testi FAILED");
+        }
 
+        //9
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("(//select[@class='form-control'])[1]")).sendKeys("5");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("(//select[@class='form-control'])[2]")).sendKeys("August");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("(//select[@class='form-control'])[3]")).sendKeys("1986");
+        Thread.sleep(1500);
 
+        //10
+        WebElement newsletterCheck = driver.findElement(By.xpath("//input[@id='newsletter']"));
+        if (!newsletterCheck.isSelected()) {
+            newsletterCheck.click();
+        }
 
+        //11
+        WebElement offerCheck = driver.findElement(By.xpath("//input[@id='optin']"));
+        if (!offerCheck.isSelected()) {
+            offerCheck.click();
+        }
 
+        //12
+        driver.findElement(By.xpath("//input[@data-qa='first_name']")).sendKeys("Ali Ata");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@data-qa='last_name']")).sendKeys("Bak");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@data-qa='address']")).sendKeys("Ahmet Mah. Aslan Sokak");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//select[@data-qa='country']")).sendKeys("United States");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@data-qa='state']")).sendKeys("Arizona");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@data-qa='city']")).sendKeys("Arizona State");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@data-qa='zipcode']")).sendKeys("75052");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@data-qa='mobile_number']")).sendKeys("+15123445654");
+        Thread.sleep(1500);
 
+        driver.findElement(By.xpath("//button[@data-qa='create-account']")).click();
 
+        //14
+        WebElement createText = driver.findElement(By.xpath("//h2[@data-qa='account-created']"));
+        if (createText.getText().contains("ACCOUNT CREATED!")) {
+            System.out.println("Account Create testi PASSED");
+        } else {
+            System.out.println("Account Create testi FAILED");
+        }
 
+        //15
+        driver.findElement(By.xpath("//a[@data-qa='continue-button']")).click();
 
+        //16
+        WebElement logInText = driver.findElement(By.xpath("//i[@class='fa fa-user']"));
+        if (logInText.getText().contains("Ali Ata")) {
+            System.out.println("Login testi PASSED");
+        } else {
+            System.out.println("Login testi FAILED");
+        }
 
+        //17
+        driver.findElement(By.xpath("//a[@href='/delete_account']")).click();
 
+        //18
+        //driver.findElement(By.xpath("//button[@class='btn btn-danger']")).click();
+        WebElement deleteAccount = driver.findElement(By.xpath("//*[@href='/delete_account']"));
+        deleteAccount.click();
 
-
-
+        //19
 
 
 
 
 
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-package day12;
+package day12_dosyaYukleme;
 
 public class odev {
 //    "http://webdriveruniversity.com/Actions" sayfasina gidin
